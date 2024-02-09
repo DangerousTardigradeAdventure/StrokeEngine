@@ -815,7 +815,7 @@ class StrokeNibbler : public Pattern {
         int _strokeSpeed = 0;
         void _updateVibrationParameters() {
             // Empirical factor to compensate time losses due to finite acceleration.
-            _strokeSpeed = int(5.0 * _stroke/_timeOfStroke);
+            _strokeSpeed = min(int(5.0 * _stroke/_timeOfStroke), int(_maxSpeed));
 
             // Scale vibration amplitude from 3mm to 25mm with sensation
             _inVibrationDistance = (int)fscale(-100.0, 100.0, (float)(3.0*_stepsPerMM), (float)(25.0*_stepsPerMM), _sensation, 0.0);
